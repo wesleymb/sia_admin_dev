@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card-body">
+    <form action="{% url 'tarefas' %}" method="post"> 
+        {% csrf_token %}
+        <label for="chave">Chave:</label>
+        <input type="text" id="chave" name="chave"> 
+        <input type="date" id="data" name="data">
+        <input type="submit" value="Pesquisar">
+    </form>
+</div>  
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Envio do cliente
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Seq</th>
+                    <th>Id</th>
+                    <th>Created on</th>
+                    <th>Updated on</th>
+                    <th>Sistema</th>
+                    <th>Data da expedicao</th>
+                    <th>Número do processo</th>
+                    <th>Código</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Seq</th>
+                    <th>Id</th>
+                    <th>Created on</th>
+                    <th>Updated on</th>
+                    <th>Sistema</th>
+                    <th>Data da expedicao</th>
+                    <th>Número do processo</th>
+                    <th>Código</th>
+                </tr>
+            </tfoot>
+            <tbody>
+
+                {% for dado in dados %}
+                    <tr>
+                        <td>{{dado.seq}}</td>
+                        <td>{{dado.id}}</td>
+                        <td>{{dado.created_on}}</td>
+                        <td>{{dado.updated_on}}</td>
+                        <td>{{dado.sistema}}</td>
+                        <td>{{dado.data_da_expedicao}}</td>
+                        <td>{{dado.numero_do_processo}}</td> 
+                        <td>{{dado.codigo}}</td> 
+                    </tr>
+                {% endfor %}
+
+
+{% endblock %}
